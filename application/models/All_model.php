@@ -33,22 +33,16 @@ class All_model extends CI_Model {
     return $this->$key();
   }
 
-  public function find_by() {
-    $this->result['data']      = $this->db->from($this->table)->where($this->where)->get()->row();
-    $this->result['totaldata'] = ($this->result['data']) ? 1 : 0;
-    return $this->result;
-  }
-
-  public function get_katalog() {
+  public function get_kategori() {
     $this->db->from('produk');
-    if (isset($this->where['katalog_id'])) {
+    if (isset($this->where['kategori_id'])) {
       $this->db->where($this->where);
     }
     $data = $this->db->get()->result();
     foreach ($data as $key => $value) {
-      $value->katalog        = $this->db->from('katalog')->get()->result();
       $value->harga_produk_f = $this->all_library->format_harga($value->harga_produk);
     }
+    $this->result['kategori']  = $this->db->from('kategori')->get()->result();
     $this->result['data']      = $data;
     $this->result['totaldata'] = ($this->result['data']) ? 1 : 0;
     return $this->result;
