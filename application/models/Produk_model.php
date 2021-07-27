@@ -33,10 +33,10 @@ class Produk_model extends CI_Model {
     return $this->$key();
   }
 
-  public function find_by() {
-    $data = $this->db->from($this->table)->get()->result();
+  public function get_produk_detail() {
+    $data = $this->db->from('produk')->where(['produk_id' => $this->where['produk_id']])->get()->result();
     foreach ($data as $key => $value) {
-      $value->no = '1';
+      $value->harga_produk_f = $this->all_library->format_harga($value->harga_produk);
     }
     $this->result['data']      = $data;
     $this->result['totaldata'] = ($this->result['data']) ? 1 : 0;

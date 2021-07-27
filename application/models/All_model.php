@@ -35,9 +35,15 @@ class All_model extends CI_Model {
 
   public function get_kategori() {
     $this->db->from('produk');
+
     if (isset($this->where['kategori_id'])) {
-      $this->db->where($this->where);
+      $this->db->where(['kategori_id' => $this->where['kategori_id']]);
     }
+
+    if (isset($this->where['search'])) {
+      $this->db->like('nama_produk', $this->where['search']);
+    }
+
     $data = $this->db->get()->result();
     foreach ($data as $key => $value) {
       $value->harga_produk_f = $this->all_library->format_harga($value->harga_produk);
