@@ -37,10 +37,7 @@ class Produk_model extends CI_Model {
     $data = $this->db->from('produk')->where(['produk_id' => $this->where['produk_id']])->get()->result();
     foreach ($data as $key => $value) {
       $value->harga_produk_f = $this->all_library->format_harga($value->harga_produk);
-<<<<<<< HEAD
       $value->link_gambar    = base_url().'assets/produk/'.$value->gambar;
-=======
->>>>>>> 33434023d17d30682f3f41185bffe47ee89bc41d
     }
     $this->result['data']      = $data;
     $this->result['totaldata'] = ($this->result['data']) ? 1 : 0;
