@@ -47,7 +47,7 @@ class Api extends CI_Controller {
         'message' => 'TABLE_NOT_SET',
       );
     }else {
-      // if ($model == DEFAULT_MODEL) {
+      // if ($model != DEFAULT_MODEL) {
       //   $this->load->model($model);
       // }
       // print_r($model);

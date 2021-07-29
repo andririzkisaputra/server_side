@@ -33,16 +33,27 @@ class All_model extends CI_Model {
     return $this->$key();
   }
 
+  public function set_data($tabel, $data) {
+    return $this->db->insert($tabel, $data);
+  }
+
   public function get_kategori() {
     $this->db->from('produk');
+
     if (isset($this->where['kategori_id'])) {
-      $this->db->where($this->where);
+      $this->db->where(['kategori_id' => $this->where['kategori_id']]);
     }
+
+    if (isset($this->where['search'])) {
+      $this->db->like('nama_produk', $this->where['search']);
+    }
+
     $data = $this->db->get()->result();
     foreach ($data as $key => $value) {
       $value->harga_produk_f = $this->all_library->format_harga($value->harga_produk);
+      $value->link_gambar    = base_url().'assets/produk/'.$value->gambar;
     }
-    $this->result['kategori']  = $this->db->from('kategori')->get()->result();
+    $this->result['kategori']  = $this->db->from('kategori')->where('is_deleted', '1')->get()->result();
     $this->result['data']      = $data;
     $this->result['totaldata'] = ($this->result['data']) ? 1 : 0;
     return $this->result;
