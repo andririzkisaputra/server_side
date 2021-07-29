@@ -42,12 +42,21 @@ class All_model extends CI_Model {
 
     if (isset($this->where['kategori_id'])) {
       $this->db->where(['kategori_id' => $this->where['kategori_id']]);
+<<<<<<< HEAD
     }
 
     if (isset($this->where['search'])) {
       $this->db->like('nama_produk', $this->where['search']);
     }
 
+=======
+    }
+
+    if (isset($this->where['search'])) {
+      $this->db->like('nama_produk', $this->where['search']);
+    }
+
+>>>>>>> 33434023d17d30682f3f41185bffe47ee89bc41d
     $data = $this->db->get()->result();
     foreach ($data as $key => $value) {
       $value->harga_produk_f = $this->all_library->format_harga($value->harga_produk);
