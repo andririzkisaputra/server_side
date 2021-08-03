@@ -33,6 +33,10 @@ class All_model extends CI_Model {
     return $this->$key();
   }
 
+  public function get_by() {
+    return $this->db->from($this->table)->where($this->where)->get()->row();
+  }
+
   public function set_data($tabel, $data) {
     return $this->db->insert($tabel, $data);
   }
